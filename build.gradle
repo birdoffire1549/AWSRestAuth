@@ -1,0 +1,57 @@
+/* ************************* *
+ * Gradle Plugin Definitions *
+ * ************************* */
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+/* **************************** *
+ * Custom variable deffinitions *
+ * **************************** */
+def appVersion = '0.0.1'
+
+/* ****************************** *
+ * Application Definition Section *
+ * ****************************** */
+sourceCompatibility = 1.8
+group = 'com.nttsecurity.tools.security'
+version = appVersion
+
+sourceSets {
+        main {
+                java.srcDir 'src/main/java'
+                resources.srcDir 'src/main/resources'
+        }
+
+        test {
+                java.srcDir 'src/test/java'
+        }
+}
+
+/* ************************************ *
+ * Repository information goes below... *
+ * ************************************ */
+repositories {
+	mavenCentral()
+}
+
+/* ************************************ *
+ * Dependency information goes below... *
+ * ************************************ */
+dependencies {
+	testCompile 'junit:junit:4.12' // Used by JUnit tests
+}
+
+/* ************************************ *
+ * JAR build information goes below...  *
+ * ************************************ */
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'AWS Rest Authenticator',
+                   'Implementation-Version': version,
+                   'Implementation-Vendor': 'NTT Security',
+                   'Build-Date': (new Date()).format('MM-dd-yyyy HH:mm:ss'),
+                   'Main-Class': 'com.nttsecurity.tools.security.aws_rest_auth.ApplicationMain'
+    }
+    
+    archiveName 'aws-rest-authenticator.jar'
+}
